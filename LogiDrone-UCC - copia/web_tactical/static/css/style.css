@@ -1,0 +1,133 @@
+:root {
+    --bg-color: #050a15;
+    --panel-bg: rgba(9, 17, 30, 0.95);
+    --border-color: #00ffcc;
+    --text-main: #00ffcc;
+    --font-stack: 'Roboto Mono', monospace;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: var(--bg-color);
+    font-family: var(--font-stack);
+    color: var(--text-main);
+    overflow: hidden;
+}
+
+.hud-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* PANEL LATERAL */
+.sidebar {
+    width: 320px;
+    background-color: var(--panel-bg);
+    border-right: 2px solid var(--border-color);
+    box-shadow: 2px 0 15px rgba(0, 255, 204, 0.3);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.glow-text {
+    text-shadow: 0 0 10px var(--text-main);
+    text-align: center;
+    border-bottom: 1px solid var(--text-main);
+    padding-bottom: 10px;
+}
+
+.tactical-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.menu-btn {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    text-align: left;
+    font-family: var(--font-stack);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.menu-btn:hover { background: rgba(0, 255, 204, 0.2); }
+.menu-btn.active { background: var(--text-main); color: var(--bg-color); box-shadow: 0 0 10px var(--text-main); }
+
+/* ÁREA CENTRAL Y VENTANAS */
+.content-wrapper {
+    flex-grow: 1;
+    position: relative;
+    background: #000;
+}
+
+.ventana {
+    display: none; /* Oculta todas las ventanas */
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.ventana.active-ventana { display: block; /* Muestra solo la activa */ }
+
+/* MAPA */
+#tactical-map {
+    width: 100%;
+    height: 100%;
+    background: #111;
+}
+
+.floating-panel {
+    position: absolute;
+    top: 20px;
+    left: 60px;
+    background: rgba(9, 17, 30, 0.85);
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    z-index: 999;
+}
+
+/* EFECTOS VISUALES */
+.scanline {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,255,204,0.1) 50%, rgba(0,255,204,0.1));
+    background-size: 100% 4px;
+    z-index: 900;
+    pointer-events: none;
+}
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+/* FORMULARIOS Y DISEÑO INTERNO DE VENTANAS */
+.panel-contenido {
+    padding: 40px;
+    color: white;
+    z-index: 10;
+    position: relative;
+    overflow-y: auto;
+    background: rgba(0,0,0,0.8);
+}
+
+.formulario-tactico { display: flex; flex-direction: column; gap: 15px; max-width: 400px; }
+.formulario-tactico label { color: var(--border-color); font-size: 12px; margin-bottom: -10px; }
+.formulario-tactico input, .formulario-tactico select { background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 10px; font-family: var(--font-stack); outline: none; }
+.formulario-tactico button { background: #00ffcc; color: #000; font-weight: bold; padding: 12px; border: none; cursor: pointer; font-family: var(--font-stack); }
+.formulario-tactico button:hover { box-shadow: 0 0 15px #00ffcc; }
+
+.layout-dos-columnas { display: flex; gap: 30px; }
+.columna { flex: 1; }
+.terminal-visual { border: 1px solid #00ffcc; padding: 15px; background: rgba(0,255,204,0.05); }
+#avl-visualizer { color: #00ffcc; font-size: 14px; margin: 0; }
+.lista-datos { list-style-type: square; line-height: 1.8; }
