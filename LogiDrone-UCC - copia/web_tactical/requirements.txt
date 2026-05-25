@@ -1,6 +1,0 @@
-fastapi
-uvicorn
-websockets
-jinja2
-geopandas
-shapely
