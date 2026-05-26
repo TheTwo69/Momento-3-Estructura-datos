@@ -1,0 +1,35 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "type": "polygon",
+                "color": "#ff3366"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -74.241784,
+                            11.271523
+                        ],
+                        [
+                            -74.210896,
+                            11.259237
+                        ],
+                        [
+                            -74.213298,
+                            11.259068
+                        ],
+                        [
+                            -74.241784,
+                            11.271523
+                        ]
+                    ]
+                ]
+            }
+        }
+    ]
+}
