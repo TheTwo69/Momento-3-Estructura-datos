@@ -1,0 +1,55 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# LogiDrone-UCC — docker-compose.yml
+# Uso:
+#   Levantar:   docker compose up --build
+#   Detener:    docker compose down
+#   Ver logs:   docker compose logs -f
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+
+  logidrone-web:
+    # ── Construcción ──────────────────────────────────────────────────────────
+    build:
+      context: .          # raíz del proyecto (donde está el Dockerfile)
+      dockerfile: Dockerfile
+
+    # ── Nombre del contenedor ─────────────────────────────────────────────────
+    container_name: logidrone-ucc
+
+    # ── Puertos: HOST:CONTENEDOR ──────────────────────────────────────────────
+    # Accede desde tu PC en: http://localhost:8000
+    ports:
+      - "8000:8000"
+
+    # ── Variables de entorno ──────────────────────────────────────────────────
+    environment:
+      - PORT=8000
+      - PYTHONUNBUFFERED=1
+
+    # ── Volumen de desarrollo: monta el código local en el contenedor ─────────
+    # Así, al guardar un archivo, Uvicorn recarga automáticamente (--reload).
+    # QUITAR en producción.
+    volumes:
+      - ./web_tactical:/app/web_tactical
+      - ./logica:/app/logica
+      - ./estructuras:/app/estructuras
+
+    # ── Política de reinicio ──────────────────────────────────────────────────
+    restart: unless-stopped
+
+    # ── Health check ──────────────────────────────────────────────────────────
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:8000/')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+    # ── Logging ───────────────────────────────────────────────────────────────
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
