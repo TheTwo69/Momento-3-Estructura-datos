@@ -1,0 +1,140 @@
+:root {
+    --amazon-dark: #131921;       /* Negro calamar oficial de Amazon */
+    --amazon-light-dark: #232f3e; /* Gris azulado oficial de Amazon */
+    --amazon-orange: #ff9900;     /* Naranja corporativo */
+    --amazon-amber: #febd69;      /* Amarillo ámbar de acento */
+    --bg-color: #0f141d;          /* Fondo para las ventanas internas */
+    --text-main: #ffffff;
+    --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body, html {
+    margin: 0; padding: 0; height: 100%;
+    background-color: var(--bg-color);
+    font-family: var(--font-stack);
+    color: var(--text-main);
+    overflow: hidden;
+}
+
+.hud-container { display: flex; height: 100vh; }
+
+/* BARRA LATERAL ESTILO AMAZON SHOPPING */
+.sidebar {
+    width: 290px;
+    background-color: var(--amazon-dark);
+    border-right: 1px solid #111;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.5);
+}
+
+.sidebar-header {
+    background-color: var(--amazon-light-dark);
+    padding: 18px;
+    border-bottom: 1px solid #111;
+}
+
+.sidebar-header h1 {
+    margin: 0;
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 700;
+}
+
+/* CATEGORÍAS DEL MENÚ (COMO AMAZON AL RESPONDER AL MENÚ COMPLETO) */
+.menu-category-title {
+    font-size: 12px;
+    font-weight: bold;
+    color: #aaa;
+    padding: 15px 20px 5px 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tactical-menu { display: flex; flex-direction: column; margin-top: 5px; }
+
+/* BOTONES LIMPIOS SIN ICONOS */
+.menu-btn {
+    background: transparent;
+    color: #ffffff;
+    border: none;
+    padding: 13px 20px;
+    text-align: left;
+    font-family: var(--font-stack);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border-left: 5px solid transparent;
+}
+
+.menu-btn:hover {
+    background-color: var(--amazon-light-dark);
+    color: #ffffff;
+}
+
+/* ITEM ACTIVO: RESALTE CON EL NARANJA DE AMAZON */
+.menu-btn.active {
+    background-color: var(--amazon-light-dark);
+    color: var(--amazon-orange);
+    border-left: 5px solid var(--amazon-orange);
+    font-weight: bold;
+}
+
+/* PANELS INTERNOS Y COMPONENTES */
+.content-wrapper { flex-grow: 1; position: relative; background: #eaeded; }
+.ventana { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+.ventana.active-ventana { display: block; }
+
+#tactical-map { width: 100%; height: 100%; background: #ffffff; }
+
+.scanline {
+    position: absolute; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0) 50%, rgba(0,0,0,0.03) 50%, rgba(0,0,0,0.03));
+    background-size: 100% 4px;
+    z-index: 900; pointer-events: none;
+}
+
+.panel-contenido {
+    padding: 35px; color: white; z-index: 10; position: relative;
+    overflow-y: auto; background: var(--bg-color);
+}
+
+.panel-contenido h2 {
+    margin-top: 0;
+    border-bottom: 1px solid var(--amazon-light-dark);
+    padding-bottom: 10px;
+    color: #ffffff;
+}
+
+.formulario-tactico { display: flex; flex-direction: column; gap: 12px; }
+.formulario-tactico label { color: #ccc; font-size: 13px; font-weight: bold; margin-bottom: -8px; }
+.formulario-tactico input, .formulario-tactico select {
+    background: #ffffff; color: #111111;
+    border: 1px solid #a6a6a6;
+    padding: 10px; font-family: var(--font-stack); outline: none;
+    border-radius: 3px;
+}
+.formulario-tactico input:focus, .formulario-tactico select:focus {
+    border-color: var(--amazon-orange);
+    box-shadow: 0 0 5px rgba(255, 153, 0, 0.5);
+}
+
+.formulario-tactico button {
+    background: var(--amazon-orange); color: #111111; font-weight: 500; font-size: 14px;
+    padding: 12px; border: 1px solid #a88734; cursor: pointer; font-family: var(--font-stack);
+    border-radius: 3px; transition: 0.1s;
+}
+.formulario-tactico button:hover { background: #f0c14b; border-color: #a88734; }
+
+.layout-dos-columnas { display: flex; gap: 30px; }
+.columna { flex: 1; }
+.terminal-visual {
+    border: 1px solid var(--amazon-light-dark);
+    padding: 20px; background: var(--amazon-dark);
+    border-radius: 4px;
+}
+
+.status-panel { padding: 15px; background: var(--amazon-dark); }
